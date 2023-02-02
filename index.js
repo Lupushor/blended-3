@@ -6,9 +6,18 @@
 //Реализуй проверку, что prompt не пустой
 //++++++++++++++++++++++++++++++++++++++++++
 
-function letMeSeeYourName(callback) {
-}
-
+// function letMeSeeYourName(greet) {
+//     let name = prompt('Укажите Ваше имя')
+//     console.log(name);
+//     if(!name) {
+//         name = 'No Name';
+//     }
+//     greet(name);
+// }
+//  function greet(name) {
+//     console.log(`Привет ${name}`)
+//  }
+// letMeSeeYourName(greet);
 //====================================================
 //====================================================
 
@@ -23,7 +32,18 @@ function letMeSeeYourName(callback) {
 //++++++++++++++++++++++++++++++++++++++++++
 
 function makeProduct(name, price, callback) {
+    const product = {
+        id: Math.random(),
+        name,
+        price,
+    }
+    callback(product)
 }
+
+function showProduct(product) {
+    console.log(product);
+}
+makeProduct('dron', 20000, showProduct)
 
 //====================================================
 //====================================================
@@ -34,8 +54,21 @@ function makeProduct(name, price, callback) {
 //++++++++++++++++++++++++++++++++++++++++++
 
 const makeShef = function (shefName) {
+    return function makeDish(dish) {
+        console.log(`${shefName} is cooking ${dish}`)
+    } 
 }
+// const makeDish = makeShef('Mango')
+// console.log(makeDish)
+// makeDish('pizza')
+// makeDish('ammoreto')
+// makeDish('borsch')
+// makeDish('rolls')
 
+makeShef('Polly')('borsch')
+makeShef('Mango')('borsch')
+makeShef('Slet')('varen')
+makeShef('Polly')('pelmen')
 //====================================================
 //====================================================
 
@@ -43,7 +76,7 @@ const makeShef = function (shefName) {
 // const product = {
 //   price: 5000,
 //   showPrice() {
-//     console.log(price);
+//     console.log(this.price);
 //   },
 // };
 // product.showPrice();
@@ -52,9 +85,9 @@ const makeShef = function (shefName) {
 //====================================================
 
 // 5. Исправьте чтобы код работал
-function callAction(action) {
-    action()
-}
+// function callAction(action) {
+//     action()
+// }
 
 // const item = {
 //     getQuantity() {
@@ -63,7 +96,7 @@ function callAction(action) {
 //     quantity: 5,
 // }
 
-// callAction(item.getQuantity);
+// callAction(item.getQuantity.bind(item));
 
 //====================================================
 //====================================================
@@ -75,8 +108,8 @@ function callAction(action) {
 //которого будут результаты вызова callback
 //callback функция должна умножать элементы на 2
 //++++++++++++++++++++++++++++++++++++++++++
-function each(array, callback) {
-}
+// const each = (array, callback) => array.map(callback);
+// const doubleValues = (number) => number * 2;
 
 // const array = [3, 5, 6, 34, 8, 83, 12, 34];
 // console.log(each(array, doubleValues));
@@ -88,10 +121,13 @@ function each(array, callback) {
 //функцию, которая считает и логирует количество своих вызовов
 //++++++++++++++++++++++++++++++++++++++++++
 
-function makeCounter() {
-}
-
-// const counter = makeCounter()
+// function makeCounter(number) {
+//     return function counter() {
+//         console.log(number += 1);
+//     }
+// }
+// // const count = 0;
+// const counter = makeCounter(0)
 // console.log(counter());
 // console.log(counter());
 // console.log(counter());
@@ -117,8 +153,16 @@ const savePassword = (password) => {
 //++++++++++++++++++++++++++++++++++++++++++
 
 function makeDiscount(discount) {
+    return function calculateNewPrice(price) {
+        return price - ((price / 100) * discount)
+        // console.log(number += 1);
+    }
 }
-
+const calculateNewPrice = makeDiscount(20)
+console.log(calculateNewPrice(100));
+console.log(calculateNewPrice(120));
+console.log(calculateNewPrice(80));
+console.log(calculateNewPrice(1000000));
 //====================================================
 //====================================================
 
